@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Article Bites</title>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="#home">What's News</a>
+        <a href="https://github.com/ty-martz" target="'blank_">Other Work</a>
+    </div>
+    <h1>&#128071; Today's Bites</h1>
+    {%if show_button%}
+        <form method="POST" action="">
+            <p><input class="button" type="submit" value="Let's Go"></p>
+        </form>
+    {%endif%}
+    {%if ooo_msg%}
+        <div>
+            <h3 style="color: red;">Unfortunately, I am out of GPT-3 credit, but check out the below links if you still want the news. &#128579;</h3>
+        </div>
+    {%endif%}
+    <ul>
+        {%for (bite, link) in bl%}
+            <li>{{bite}} &#10145;  <a class="newslink" href={{link}} target="blank_">Read More</a></li>
+            <br>
+            <br>
+        {%endfor%}
+    </ul>
+    <br>
+    <hr>
+    <br>
+    <div><i>News sources from <a href="https://news.yahoo.com/">Yahoo News</a>. Bites generated with GPT-3 by <a href="https://openai.com/">OpenAI</a>.</i></div>
+
+</body>
+</html>
