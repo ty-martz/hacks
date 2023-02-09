@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Text Recognition</title>
+    </head>
+    <body>
+        <h1>Text Recognition</h1>
+        <form action="{{ url_for('extract_text') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
+            <input type="submit" value="Extract Text">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Extracted Text</title>
+    <style>
+      #text {
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        font-size: 18px;
+        margin: 20px;
+      }
+      .confidence {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      #copy-button {
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Extracted Text</h1>
+    
+    <div class="container">
+      <div class="confidence">Extraction confidence: {{ conf }}%</div>
+    </div>
+    <textarea id="text" readonly>{{ text }}</textarea>
+    <button id="copy-button">Copy to Clipboard</button>
+    <script>
+      const copyButton = document.querySelector("#copy-button");
+      const text = document.querySelector("#text");
+      copyButton.addEventListener("click", function() {
+        text.select();
+        document.execCommand("copy");
+      });
+    </script>
+  </body>
+</html>
