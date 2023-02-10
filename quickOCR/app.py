@@ -3,7 +3,8 @@ import pytesseract
 from PIL import Image
 import numpy as np
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Ty Martz\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
+# REPLACE BELOW WITH YOUR tesseract FILE PATH
+pytesseract.pytesseract.tesseract_cmd = r"PATH\TO\Tesseract-OCR\tesseract.exe"#r"C:\Users\Ty Martz\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 
 app = Flask(__name__)
 
@@ -23,10 +24,11 @@ def extract_text():
     image = Image.open(image).convert("L")
 
     # Perform OCR on the image
+    # extrct confidence score
     img_data = pytesseract.image_to_data(image, lang='eng',
                                                     config='--psm 11',
                                                     output_type='dict')
-    #print(tc.keys())
+    # extract text
     text = pytesseract.image_to_string(image, lang='eng',
                                                     config='--psm 11',
                                                     output_type='dict')
@@ -35,14 +37,7 @@ def extract_text():
     confidence_scores = img_data['conf']
     confs = round(np.mean([x for x in confidence_scores if x != -1]), 2)
 
-    # Normalize the confidence scores to values between 0 and 1
-    #confidence_scores = (confidence_scores - np.min(confidence_scores)) / (np.max(confidence_scores) - np.min(confidence_scores))
-
-    # Generate a color map based on the confidence scores
-    #color_map = (1 - confidence_scores) * np.array([255, 0, 0]) + confidence_scores * np.array([0, 255, 0])
-
-    return render_template("extract_text.html", text=text['text'], #color_map=color_map, 
-    conf=confs)
+    return render_template("extract_text.html", text=text['text'], conf=confs)
 
 if __name__ == "__main__":
     app.run(debug=True)
